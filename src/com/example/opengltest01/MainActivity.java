@@ -54,11 +54,13 @@ public class MainActivity extends Activity {
 
 		setContentView(R.layout.activity_main);
 
-		mGLView = new MyGLSurfaceView(this);
+//		mGLView = new MyGLSurfaceView(context)
 		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
-//		final View contentView = findViewById(R.id.fullscreen_content);
-		final View contentView = mGLView;
+		final View contentView = findViewById(R.id.fullscreen_content);
+//		final View contentView = mGLView;
+		
+		contentView.setBackgroundColor(android.graphics.Color.RED);
 		
 		// Create a GLSurfaceView instance and set it
         // as the ContentView for this Activity.
