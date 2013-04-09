@@ -4,6 +4,7 @@ import com.example.opengltest01.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +45,8 @@ public class MainActivity extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
+	
+	private GLSurfaceView mGLView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,18 @@ public class MainActivity extends Activity {
 
 		setContentView(R.layout.activity_main);
 
+		mGLView = new MyGLSurfaceView(this);
+		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
-		final View contentView = findViewById(R.id.fullscreen_content);
+//		final View contentView = findViewById(R.id.fullscreen_content);
+		final View contentView = mGLView;
+		
+		// Create a GLSurfaceView instance and set it
+        // as the ContentView for this Activity.
+        
+//        contentView = mGLView;
+//        setContentView(mGLView);
+		
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
@@ -116,6 +129,10 @@ public class MainActivity extends Activity {
 		// while interacting with the UI.
 		findViewById(R.id.dummy_button).setOnTouchListener(
 				mDelayHideTouchListener);
+		
+		
+		
+        
 	}
 
 	@Override
