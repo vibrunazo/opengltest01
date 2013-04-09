@@ -14,22 +14,18 @@ import android.opengl.GLSurfaceView;
 
 public class MyRenderer implements GLSurfaceView.Renderer {
 
-	@Override
-	public void onDrawFrame(GL10 arg0) {
-		// TODO Auto-generated method stub
+	public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+        // Set the background frame color
+        GLES20.glClearColor(0.5f, 0.8f, 0.5f, 1.0f);
+    }
 
-	}
+    public void onDrawFrame(GL10 unused) {
+        // Redraw background color
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+    }
 
-	@Override
-	public void onSurfaceChanged(GL10 gl, int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		// TODO Auto-generated method stub
-
-	}
+    public void onSurfaceChanged(GL10 unused, int width, int height) {
+        GLES20.glViewport(0, 0, width, height);
+    }
 
 }
