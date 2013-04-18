@@ -9,6 +9,7 @@ import android.opengl.GLES20;
 public class Triangle {
 
     private FloatBuffer vertexBuffer;
+    private int mMVPMatrixHandle;
     
     private final String vertexShaderCode =
 			"attribute vec4 vPosition;" +
@@ -67,7 +68,7 @@ public class Triangle {
         GLES20.glLinkProgram(mProgram);                  // creates OpenGL ES program executables
     }
     
-    public void draw() {
+    public void draw(float[] mvpMatrix) {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram);
 
@@ -88,6 +89,12 @@ public class Triangle {
         // Set color for drawing the triangle
         GLES20.glUniform4fv(mColorHandle, 1, color, 0);
 
+        // get handle to shape's transformation matrix
+        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
+
+        // Apply the projection and view transformation
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+        
         // Draw the triangle
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount);
 
